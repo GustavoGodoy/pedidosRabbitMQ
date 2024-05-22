@@ -62,7 +62,7 @@ class PedidoControllerTest {
 
     @Test
     void testGetValorTotal() {
-        when(pedidoRepository.findByCodigoPedido(1001)).thenReturn(Optional.of(pedido1));
+        when(pedidoRepository.findFirstByCodigoPedido(1001)).thenReturn(Optional.of(pedido1));
 
         double valorTotal = pedidoController.getValorTotal(1001);
         assertEquals(110.0, valorTotal, 0.00001);

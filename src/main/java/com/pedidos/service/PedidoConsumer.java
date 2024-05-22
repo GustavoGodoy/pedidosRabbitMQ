@@ -3,6 +3,8 @@ package com.pedidos.service;
 import com.pedidos.model.Pedido;
 import com.pedidos.repository.PedidoRepository;
 
+import java.util.Optional;
+
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,8 @@ public class PedidoConsumer {
 
     @RabbitListener(queues = "pedidoQueue")
     public void receiveMessage(Pedido pedido) {
+        Optional<Pedido> pedidoAntigo = pedidoRepository.findFirstByCodigoPedido(pedido.getCodigoPedido());
+        pedidoAntigo.ifPresent(x -> pedidoRepository.deleteById(x.getId()));
         System.out.println("Pedido recebido via consumer: " + pedido);
         pedidoRepository.save(pedido);
     }

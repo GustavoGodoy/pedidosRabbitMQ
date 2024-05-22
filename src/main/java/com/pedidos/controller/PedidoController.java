@@ -32,7 +32,7 @@ public class PedidoController {
     @Operation(summary = "O valor total de um pedido.", description = "Retorna o valor total de um pedido.")
     @GetMapping("/pedidos/{codigoPedido}/total/")
     public double getValorTotal(@PathVariable int codigoPedido) {
-        Pedido pedido = pedidoRepository.findByCodigoPedido(codigoPedido).orElse(null);
+        Pedido pedido = pedidoRepository.findFirstByCodigoPedido(codigoPedido).orElse(null);
         return pedido != null ? pedido.getItens().stream().mapToDouble(item -> item.getPreco() * item.getQuantidade()).sum() : 0.0;
     }
 
