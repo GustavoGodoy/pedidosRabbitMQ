@@ -31,20 +31,20 @@ public class PedidoController {
 
     @Operation(summary = "O valor total de um pedido.", description = "Retorna o valor total de um pedido.")
     @GetMapping("/pedidos/{codigoPedido}/total/")
-    public double getValorTotal(@PathVariable int codigoPedido) {
+    public double getValorTotal(@PathVariable long codigoPedido) {
         Pedido pedido = pedidoRepository.findFirstByCodigoPedido(codigoPedido).orElse(null);
         return pedido != null ? pedido.getItens().stream().mapToDouble(item -> item.getPreco() * item.getQuantidade()).sum() : 0.0;
     }
 
     @Operation(summary = "Quantidade de pedidos de um determinado cliente.", description = "Retorna a quantidade de pedidos de um cliente.")
     @GetMapping("/clientes/{codigoCliente}/pedidos/quantidade")
-    public long getQuantidadePedidosPorCliente(@PathVariable int codigoCliente) {
+    public long getQuantidadePedidosPorCliente(@PathVariable long codigoCliente) {
         return pedidoRepository.findByCodigoCliente(codigoCliente).size();
     }
 
     @Operation(summary = "Lista de pedidos de um determinado cliente.", description = "Retorna a lista de pedidos de um cliente.")
     @GetMapping("/clientes/{codigoCliente}/pedidos/")
-    public List<Pedido> getPedidosPorCliente(@PathVariable int codigoCliente) {
+    public List<Pedido> getPedidosPorCliente(@PathVariable long codigoCliente) {
         return pedidoRepository.findByCodigoCliente(codigoCliente);
     }
 

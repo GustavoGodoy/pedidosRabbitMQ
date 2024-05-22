@@ -22,7 +22,7 @@ public class Pedido implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Schema(description = "ID gerado automaticamente pelo banco de dados")
+    @Schema(description = "ID gerado automaticamente pelo banco de dados", hidden = true)
     private String id;
     @Schema(description = "Codigo do pedido")
     private long codigoPedido;
