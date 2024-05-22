@@ -25,9 +25,9 @@ public class Pedido implements Serializable {
     @Schema(description = "ID gerado automaticamente pelo banco de dados")
     private String id;
     @Schema(description = "Codigo do pedido")
-    private int codigoPedido;
+    private long codigoPedido;
     @Schema(description = "Codigo do cliente")
-    private int codigoCliente;
+    private long codigoCliente;
     @Schema(description = "Lista de itens no pedido")
     private List<Item> itens;
 
